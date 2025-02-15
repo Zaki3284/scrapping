@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap');
+
+:root {
+    --primary-dark: #1a365d;
+    --primary-light: #2c5282;
+    --accent: #d69e2e;
+    --secondary: #4a5568;
+}
+
+.dark {
+    --primary-dark: #2d3748;
+    --primary-light: #4a5568;
+    --accent: #ecc94b;
+    --secondary: #cbd5e0;
+}
+
+.arabic-font {
+    font-family: 'Cairo', sans-serif;
+}
+
+/* Add any additional custom styles here */

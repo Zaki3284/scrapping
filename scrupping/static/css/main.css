@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap');
+
+:root {
+    --primary-dark: #1a365d;
+    --primary-light: #2c5282;
+    --accent: #d69e2e;
+    --secondary: #4a5568;
+}
+
+.dark {
+    --primary-dark: #2d3748;
+    --primary-light: #4a5568;
+    --accent: #ecc94b;
+    --secondary: #cbd5e0;
+}
+
+/* Base Styles */
+html {
+    font-size: 16px;
+}
+
+body {
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.arabic-font {
+    font-family: 'Cairo', sans-serif;
+}
+
+/* Navigation */
+nav {
+    padding: 1rem 0;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.mobile-menu {
+    display: none;
+}
+
+/* Product Cards */
+.product-card {
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 100%;
+        padding: 0 2%;
+    }
+    
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .mobile-menu {
+        display: block;
+    }
+    
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .hero-content {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+    
+    nav {
+        padding: 0.5rem 0;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero-section {
+        padding: 2rem 1rem;
+    }
+    
+    .hero-section h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+    
+    .filter-buttons {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    html {
+        font-size: 13px;
+    }
+    
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .hero-section h1 {
+        font-size: 1.75rem;
+    }
+    
+    .cta-button {
+        width: 100%;
+        padding: 1rem;
+    }
+    
+    .product-card {
+        margin-bottom: 1rem;
+    }
+    
+    footer .grid-cols-4 {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+/* Special Handling for Arabic Font */
+@media (max-width: 768px) {
+    .arabic-font {
+        font-size: 1.1em;
+        line-height: 1.8;
+    }
+}
+
+/* Touch Optimization */
+@media (hover: none) {
+    button, a {
+        min-width: 44px;
+        min-height: 44px;
+    }
+    
+    .product-card {
+        transition: none;
+    }
+}
+
+/* Landscape Mobile Optimization */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero-section {
+        padding: 1rem 0;
+    }
+    
+    nav {
+        padding: 0.25rem 0;
+    }
+}

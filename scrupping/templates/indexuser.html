@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to PriceFox🦊</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Navigation -->
+    <nav class="bg-gray-800 dark:bg-gray-700 shadow-lg w-full p-4 flex justify-between items-center text-white">
+        <div class="flex space-x-6 ms-10">
+            <a href="{% url 'dashboard' %}" class="flex items-center font-bold text-lg hover:text-amber-400">
+                <i class="fas fa-user-shield me-2"></i>Welcome, {{ user.username }}!
+            </a>
+            <a href="{% url 'dashboard' %}" class="hover:text-amber-400">
+                <i class="fas fa-home me-1"></i>
+                <span data-lang="en">Dashboard</span>
+                <span data-lang="ar" class="hidden">لوحة التحكم</span>
+                <span data-lang="fr" class="hidden">Tableau de bord</span>
+            </a>
+            <a href="" class="hover:text-amber-400">
+                <i class="fas fa-box-open me-1"></i>
+                <span data-lang="en">Orders</span>
+                <span data-lang="ar" class="hidden">طلبات</span>
+                <span data-lang="fr" class="hidden">Commandes</span>
+            </a>
+            <a href="" class="hover:text-amber-400">
+                <i class="fas fa-heart me-1"></i>
+                <span data-lang="en">Wishlist</span>
+                <span data-lang="ar" class="hidden">المفضلة</span>
+                <span data-lang="fr" class="hidden">Liste de souhaits</span>
+            </a>
+        </div>
+        <div class="flex items-center space-x-4 me-10">
+            <div class="relative group">
+                <img src="{{ user.profile.image.url }}" class="rounded-full cursor-pointer" alt="profile" style="height: 50px; width: 50px; object-fit: cover;">
+                <div class="absolute hidden group-hover:block end-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl p-4">
+                    <a href="" class="block text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 p-2">
+                        <i class="fas fa-user-cog me-2"></i>
+                        <span data-lang="en">Profile Settings</span>
+                        <span data-lang="ar" class="hidden">إعدادات الملف</span>
+                        <span data-lang="fr" class="hidden">Paramètres du profil</span>
+                    </a>
+                    <a href="{% url 'logout' %}" class="block text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 p-2">
+                        <i class="fas fa-sign-out-alt me-2"></i>
+                        <span data-lang="en">Logout</span>
+                        <span data-lang="ar" class="hidden">تسجيل الخروج</span>
+                        <span data-lang="fr" class="hidden">Déconnexion</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="container mx-auto mt-10 px-4">
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 dark:text-gray-400" data-lang="en">Active Orders</p>
+                        <p class="text-3xl font-bold mt-2">3</p>
+                    </div>
+                    <i class="fas fa-box-open text-4xl text-amber-500"></i>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 dark:text-gray-400" data-lang="en">Wishlist Items</p>
+                        <p class="text-3xl font-bold mt-2">12</p>
+                    </div>
+                    <i class="fas fa-heart text-4xl text-amber-500"></i>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 dark:text-gray-400" data-lang="en">Saved Comparisons</p>
+                        <p class="text-3xl font-bold mt-2">7</p>
+                    </div>
+                    <i class="fas fa-chart-line text-4xl text-amber-500"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4" data-lang="en">Recent Activity</h2>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between p-3 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg">
+                    <div class="flex items-center space-x-4">
+                        <i class="fas fa-search text-amber-500"></i>
+                        <span data-lang="en">You compared "Smartphone X" prices</span>
+                    </div>
+                    <span class="text-gray-500 text-sm">2h ago</span>
+                </div>
+                <!-- Add more activity items -->
+            </div>
+        </div>
+
+        <!-- Price Alerts -->
+        <div class="bg-amber-50 dark:bg-gray-700 rounded-xl shadow-lg p-6">
+            <h2 class="text-2xl font-bold mb-4" data-lang="en">Active Price Alerts</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-lg">
+                    <div>
+                        <p class="font-semibold">Laptop Model XYZ</p>
+                        <p class="text-sm text-gray-500">Current price: $999</p>
+                    </div>
+                    <span class="text-amber-500">-15%</span>
+                </div>
+                <!-- Add more price alerts -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer (Simplified) -->
+    <footer class="mt-16 bg-gray-800 dark:bg-gray-700 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-400">&copy; {% now "Y" %} PriceFox 🦊. <span data-lang="en">All rights reserved</span></p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
