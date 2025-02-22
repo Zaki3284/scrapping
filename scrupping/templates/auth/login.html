@@ -10,17 +10,29 @@
     <link rel="stylesheet" href="{% static 'css/Signup.css' %}">
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Floating Robot Assistant -->
+    <div id="robotGuide" class="fixed bottom-10 right-10 bg-white dark:bg-gray-800 shadow-lg rounded-xl p-4 flex items-center space-x-3 opacity-0 translate-x-10 transition-all duration-500 max-w-xs">
+        <i class="fas fa-robot text-3xl text-amber-500"></i>
+        <p class="text-gray-700 dark:text-gray-300 text-sm">
+            <span data-lang="en">Create an account to search, explore, and get email updates!</span>
+            <span data-lang="ar" class="hidden arabic-font">أنشئ حسابًا للبحث، الاستكشاف، واستقبال التحديثات!</span>
+            <span data-lang="fr" class="hidden">Créez un compte pour explorer et recevoir des mises à jour!</span>
+        </p>
+    </div>
+
     <!-- Navigation -->
     <nav class="bg-gray-800 dark:bg-gray-700 shadow-lg w-full p-4 flex justify-between items-center text-white">
-        <a href="index2.html" class="flex items-center font-bold text-lg hover:text-amber-400 ms-10">
+        <a href="{% url 'landing_page' %}" class="flex items-center font-bold text-lg hover:text-amber-400 ms-10">
             <i class="fas fa-car-side me-2"></i>PriceFox 🦊
         </a>
         <div class="flex items-center space-x-4 me-10">
+            {% if request.path != '/register/' %}
             <a href="{% url 'register' %}" class="hover:text-amber-400">
                 <span data-lang="en">Create Account</span>
                 <span data-lang="ar" class="hidden">إنشاء حساب</span>
                 <span data-lang="fr" class="hidden">Créer un compte</span>
             </a>
+            {% endif %}
         </div>
     </nav>
 
@@ -32,6 +44,11 @@
             <h1 class="text-3xl font-bold mb-6 text-gray-800 dark:text-white hidden" data-lang="fr">Content de te revoir!</h1>
 
             <form class="space-y-6">
+                <!-- Honeypot Field -->
+                <div class="hidden">
+                    <input type="text" name="website" id="website" tabindex="-1" autocomplete="off">
+                </div>
+
                 <div>
                     <label class="block text-gray-700 dark:text-gray-300 mb-2">
                         <span data-lang="en">Email</span>
@@ -40,9 +57,7 @@
                     </label>
                     <div class="flex items-center border dark:border-gray-600 rounded-lg px-3 py-2">
                         <i class="fas fa-envelope text-gray-400 me-2"></i>
-                        <input type="email" required 
-                            class="w-full bg-transparent focus:outline-none"
-                            placeholder="john@example.com">
+                        <input type="email" required class="w-full bg-transparent focus:outline-none" placeholder="john@example.com">
                     </div>
                 </div>
 
@@ -54,14 +69,11 @@
                     </label>
                     <div class="flex items-center border dark:border-gray-600 rounded-lg px-3 py-2">
                         <i class="fas fa-lock text-gray-400 me-2"></i>
-                        <input type="password" required 
-                            class="w-full bg-transparent focus:outline-none"
-                            placeholder="••••••••">
+                        <input type="password" required class="w-full bg-transparent focus:outline-none" placeholder="••••••••">
                     </div>
                 </div>
 
-                <button type="submit" 
-                    class="w-full bg-amber-500 hover:bg-amber-600 text-white py-3 rounded-lg font-semibold">
+                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-white py-3 rounded-lg font-semibold">
                     <span data-lang="en">Sign In</span>
                     <span data-lang="ar" class="hidden">تسجيل الدخول</span>
                     <span data-lang="fr" class="hidden">Se connecter</span>
@@ -73,34 +85,6 @@
                         <span data-lang="ar" class="hidden">نسيت كلمة المرور؟</span>
                         <span data-lang="fr" class="hidden">Mot de passe oublié?</span>
                     </a>
-                </div>
-
-                <div class="relative">
-                    <div class="absolute inset-0 flex items-center">
-                        <div class="w-full border-t border-gray-300"></div>
-                    </div>
-                    <div class="relative flex justify-center text-sm">
-                        <span class="px-2 bg-white dark:bg-gray-800 text-gray-500">
-                            <span data-lang="en">Or continue with</span>
-                            <span data-lang="ar" class="hidden">أو تابع باستخدام</span>
-                            <span data-lang="fr" class="hidden">Ou continuer avec</span>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-3 gap-3">
-                    <button type="button" 
-                        class="flex items-center justify-center py-2 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
-                        <i class="fab fa-google text-red-500"></i>
-                    </button>
-                    <button type="button" 
-                        class="flex items-center justify-center py-2 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
-                        <i class="fab fa-facebook text-blue-600"></i>
-                    </button>
-                    <button type="button" 
-                        class="flex items-center justify-center py-2 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
-                        <i class="fab fa-apple"></i>
-                    </button>
                 </div>
             </form>
         </div>
@@ -127,4 +111,23 @@
             </div>
         </div>
     </footer>
+
     <script src="{% static 'js/scripts.js' %}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const robotGuide = document.getElementById("robotGuide");
+            
+            // Show/hide robot guide
+            setTimeout(() => {
+                robotGuide.classList.remove("opacity-0", "translate-x-10");
+            }, 1000);
+            
+            setTimeout(() => {
+                robotGuide.classList.add("opacity-0", "translate-x-10");
+            }, 6000);
+
+            // Copyright year
+            document.getElementById('copyrightYear').textContent = new Date().getFullYear();
+        });
+    </script>
+</body>

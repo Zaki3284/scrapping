@@ -11,45 +11,37 @@
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
     <!-- Navigation -->
-    <nav class="bg-gray-800 dark:bg-gray-700 shadow-lg w-full p-4 flex justify-between items-center text-white">
-        <div class="flex space-x-6 ms-10">
-            <a href="{% url 'dashboard' %}" class="flex items-center font-bold text-lg hover:text-amber-400">
-                <i class="fas fa-user-shield me-2"></i>Welcome, {{ user.username }}!
+    <nav class="bg-white dark:bg-gray-800 shadow-lg w-full p-4 flex justify-between items-center">
+        <div class="flex space-x-8 ms-10">
+            <a href="{% url 'dashboard' %}" class="flex items-center font-bold text-lg text-gray-700 dark:text-white hover:text-amber-500 transition-colors">
+                <img src="{% static 'images/logo.jpeg' %}" class="h-8 w-8 mr-2" alt="PriceFox Logo">
+                PriceFox
             </a>
-            <a href="{% url 'dashboard' %}" class="hover:text-amber-400">
-                <i class="fas fa-home me-1"></i>
-                <span data-lang="en">Dashboard</span>
-                <span data-lang="ar" class="hidden">لوحة التحكم</span>
-                <span data-lang="fr" class="hidden">Tableau de bord</span>
-            </a>
-            <a href="" class="hover:text-amber-400">
-                <i class="fas fa-box-open me-1"></i>
-                <span data-lang="en">Orders</span>
-                <span data-lang="ar" class="hidden">طلبات</span>
-                <span data-lang="fr" class="hidden">Commandes</span>
-            </a>
-            <a href="" class="hover:text-amber-400">
-                <i class="fas fa-heart me-1"></i>
-                <span data-lang="en">Wishlist</span>
-                <span data-lang="ar" class="hidden">المفضلة</span>
-                <span data-lang="fr" class="hidden">Liste de souhaits</span>
-            </a>
+            <div class="flex items-center space-x-6">
+                <a href="{% url 'dashboard' %}" class="flex items-center text-gray-600 dark:text-gray-300 hover:text-amber-500 transition-colors">
+                    <i class="fas fa-chart-line mr-2"></i>
+                    Dashboard
+                </a>
+                <a href="#" class="flex items-center text-gray-600 dark:text-gray-300 hover:text-amber-500 transition-colors">
+                    <i class="fas fa-heart mr-2"></i>
+                    Wishlist
+                </a>
+            </div>
         </div>
         <div class="flex items-center space-x-4 me-10">
+            <button class="p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full">
+                <i class="fas fa-bell text-lg"></i>
+            </button>
             <div class="relative group">
-                <img src="{{ user.profile.image.url }}" class="rounded-full cursor-pointer" alt="profile" style="height: 50px; width: 50px; object-fit: cover;">
-                <div class="absolute hidden group-hover:block end-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl p-4">
-                    <a href="" class="block text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 p-2">
-                        <i class="fas fa-user-cog me-2"></i>
-                        <span data-lang="en">Profile Settings</span>
-                        <span data-lang="ar" class="hidden">إعدادات الملف</span>
-                        <span data-lang="fr" class="hidden">Paramètres du profil</span>
+                <img src="{{ user.profile.image.url }}" class="h-10 w-10 rounded-full cursor-pointer ring-2 ring-amber-500" alt="profile">
+                <div class="absolute hidden group-hover:block right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl py-2">
+                    <a href="#" class="flex items-center px-4 py-3 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i class="fas fa-user-cog mr-3"></i>
+                        Profile Settings
                     </a>
-                    <a href="{% url 'logout' %}" class="block text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 p-2">
-                        <i class="fas fa-sign-out-alt me-2"></i>
-                        <span data-lang="en">Logout</span>
-                        <span data-lang="ar" class="hidden">تسجيل الخروج</span>
-                        <span data-lang="fr" class="hidden">Déconnexion</span>
+                    <a href="{% url 'logout' %}" class="flex items-center px-4 py-3 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i class="fas fa-sign-out-alt mr-3"></i>
+                        Logout
                     </a>
                 </div>
             </div>
@@ -57,76 +49,78 @@
     </nav>
 
     <!-- Dashboard Content -->
-    <div class="container mx-auto mt-10 px-4">
+    <div class="container mx-auto mt-8 px-4">
         <!-- Quick Stats -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-gray-500 dark:text-gray-400" data-lang="en">Active Orders</p>
-                        <p class="text-3xl font-bold mt-2">3</p>
-                    </div>
-                    <i class="fas fa-box-open text-4xl text-amber-500"></i>
+            <!-- Repeat similar cards for other stats -->
+        </div>
+
+        <!-- Search and Filter Section -->
+        <div class="mb-8">
+            <div class="flex flex-col md:flex-row gap-4 mb-6">
+                <div class="relative flex-1">
+                    <input type="text" id="search" placeholder="Search items..." 
+                           class="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-amber-500 focus:border-transparent">
+                    <i class="fas fa-search absolute left-4 top-4 text-gray-400"></i>
                 </div>
+                <div class="relative flex-1">
+                    <select id="filter" class="w-full pl-4 pr-10 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 appearance-none">
+                        <option value="">All Categories</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="clothing">Clothing</option>
+                    </select>
+                    <i class="fas fa-chevron-down absolute right-4 top-4 text-gray-400"></i>
+                </div>
+                <button id="filterButton" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white rounded-lg transition-colors">
+                    <i class="fas fa-filter mr-2"></i>
+                    Filter
+                </button>
             </div>
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-gray-500 dark:text-gray-400" data-lang="en">Wishlist Items</p>
-                        <p class="text-3xl font-bold mt-2">12</p>
+
+            <!-- Items Grid -->
+            <div id="interestingItems" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Sample Item -->
+                <div class="item bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-shadow" data-category="electronics">
+                    <div class="p-4">
+                        <div class="relative">
+                            <img src="https://via.placeholder.com/300" alt="Product" class="w-full h-48 object-cover rounded-lg">
+                            <span class="absolute top-2 right-2 bg-amber-500 text-white px-3 py-1 rounded-full text-xs">-20%</span>
+                        </div>
+                        <div class="mt-4">
+                            <h3 class="item-name font-semibold text-lg dark:text-white">Smartphone X</h3>
+                            <div class="flex items-center justify-between mt-2">
+                                <span class="text-amber-500 font-bold">$599</span>
+                                <button class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full">
+                                    <i class="fas fa-heart text-gray-400 hover:text-amber-500"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <i class="fas fa-heart text-4xl text-amber-500"></i>
                 </div>
-            </div>
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-gray-500 dark:text-gray-400" data-lang="en">Saved Comparisons</p>
-                        <p class="text-3xl font-bold mt-2">7</p>
-                    </div>
-                    <i class="fas fa-chart-line text-4xl text-amber-500"></i>
-                </div>
+                <!-- Add more items -->
             </div>
         </div>
 
         <!-- Recent Activity -->
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8">
-            <h2 class="text-2xl font-bold mb-4" data-lang="en">Recent Activity</h2>
-            <div class="space-y-4">
-                <div class="flex items-center justify-between p-3 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 mb-8">
+            <h2 class="text-xl font-bold mb-4 dark:text-white">Recent Activity</h2>
+            <div class="divide-y divide-gray-200 dark:divide-gray-700">
+                <!-- Activity Item -->
+                <div class="flex items-center justify-between py-3">
                     <div class="flex items-center space-x-4">
-                        <i class="fas fa-search text-amber-500"></i>
-                        <span data-lang="en">You compared "Smartphone X" prices</span>
+                        <div class="p-3 bg-amber-50 dark:bg-gray-700 rounded-full">
+                            <i class="fas fa-search text-amber-500"></i>
+                        </div>
+                        <div>
+                            <p class="font-medium dark:text-white">Price drop detected</p>
+                            <p class="text-sm text-gray-500">Smartphone X - Now $599</p>
+                        </div>
                     </div>
-                    <span class="text-gray-500 text-sm">2h ago</span>
+                    <span class="text-sm text-gray-500">2h ago</span>
                 </div>
-                <!-- Add more activity items -->
-            </div>
-        </div>
-
-        <!-- Price Alerts -->
-        <div class="bg-amber-50 dark:bg-gray-700 rounded-xl shadow-lg p-6">
-            <h2 class="text-2xl font-bold mb-4" data-lang="en">Active Price Alerts</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-lg">
-                    <div>
-                        <p class="font-semibold">Laptop Model XYZ</p>
-                        <p class="text-sm text-gray-500">Current price: $999</p>
-                    </div>
-                    <span class="text-amber-500">-15%</span>
-                </div>
-                <!-- Add more price alerts -->
+                <!-- More activity items -->
             </div>
         </div>
     </div>
-
-    <!-- Footer (Simplified) -->
-    <footer class="mt-16 bg-gray-800 dark:bg-gray-700 text-white py-8">
-        <div class="container mx-auto px-4 text-center">
-            <p class="text-gray-400">&copy; {% now "Y" %} PriceFox 🦊. <span data-lang="en">All rights reserved</span></p>
-        </div>
-    </footer>
-
-    <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

@@ -138,12 +138,6 @@ function generateProductCards(lang = 'en') {
                 <p class="text-gray-600 dark:text-gray-300 mb-4">${product[lang].desc}</p>
                 <div class="flex justify-between items-center">
                     <span class="text-2xl font-bold text-amber-500">MRU${product.price.toLocaleString()}</span>
-                    <button class="bg-amber-500 hover:bg-amber-600 px-4 py-2 rounded-full text-white">
-                        <i class="fas fa-cart-plus me-2"></i>
-                        <span data-lang="en">Add to Cart</span>
-                        <span data-lang="ar" class="hidden">أضف إلى السلة</span>
-                        <span data-lang="fr" class="hidden">Ajouter au Panier</span>
-                    </button>
                 </div>
             </div>
         `;

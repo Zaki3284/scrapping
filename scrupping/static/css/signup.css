@@ -18,4 +18,6 @@
     font-family: 'Cairo', sans-serif;
 }
 
-/* Add any additional custom styles here */
+.hidden {
+    display: none !important;
+}
