@@ -1,0 +1,9 @@
+<!-- 📝 Voursa.com Cars Page – HTML Structure Notes
+Listings Container:
+All car listings are direct children of the <div> with id="separa".
+Each listing is inside an <a> tag linking to the details page.
+Inside Each <a> Tag (Single Listing):
+Image: <div id="photo"> → <img src="...">
+Title: <div id="titre"> → Contains the car name/title.
+Price: <div id="prix"> → Displays the price.
+Link: The href attribute of the <a> tag points to the car details page. -->
