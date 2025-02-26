@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheapest Cars</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cheapest Cars</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Price (MRU)</th>
+                <th>Image</th>
+                <th>Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for car in cars %}
+            <tr>
+                <td>{{ car.Title }}</td>
+                <td>{{ car.Price }}</td>
+                <td>
+                    {% if car.Image_URL != "N/A" %}
+                        <img src="{{ car.Image_URL }}" alt="{{ car.Title }}" width="100">
+                    {% else %}
+                        No Image
+                    {% endif %}
+                </td>
+                <td>
+                    {% if car.Link != "N/A" %}
+                        <a href="{{ car.Link }}" target="_blank">View Details</a>
+                    {% else %}
+                        No Link
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

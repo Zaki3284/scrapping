@@ -1,27 +1,48 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
+import requests
+from bs4 import BeautifulSoup
+import json
 
-url = 'https://www.voursa.com/index.cfm?gct=1&sct=11&gv=13'
-options = Options()
-options.headless = True  
+url = "https://www.voursa.com/Index.cfm?gct=3&gv=13"
+response = requests.get(url)
 
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+if response.status_code == 200:
+    soup = BeautifulSoup(response.content, 'html.parser')
 
-driver.get(url)
+    houses = []
 
-driver.implicitly_wait(10)
+    for house_div in soup.find_all('div', id='rptregion'):
+        title = house_div.find('div', id='titre').text.strip() if house_div.find('div', id='titre') else "N/A"
 
-listings = driver.find_elements(By.CSS_SELECTOR, 'div.listing a')
+        price_div = house_div.find('div', id='prix')
+        price = price_div.text.strip() if price_div else "N/A"
 
-for listing in listings:
-    title = listing.find_element(By.CLASS_NAME, 'titre').text if listing.find_element(By.CLASS_NAME, 'titre') else 'N/A'
-    price = listing.find_element(By.CLASS_NAME, 'prix').text if listing.find_element(By.CLASS_NAME, 'prix') else 'N/A'
-    image = listing.find_element(By.CLASS_NAME, 'photo').find_element(By.TAG_NAME, 'img').get_attribute('src') if listing.find_element(By.CLASS_NAME, 'photo') else 'No image'
-    link = listing.get_attribute('href') if listing.get_attribute('href') else 'No link'
+        try:
+            price = float(price.replace('MRU', '').replace(',', '').strip())
+        except ValueError:
+            price = float('inf') 
 
-    print(f"Title: {title} | Price: {price} | Image: {image} | Link: {link}")
+        image_tag = house_div.find('img')
+        image_url = image_tag['src'] if image_tag else "N/A"
+        image_url = f"https://www.voursa.com{image_url}" if image_url != "N/A" else "N/A"
 
-driver.quit()
+        link_tag = house_div.find_parent('a')
+        link = link_tag['href'] if link_tag else "N/A"
+        link = f"https://www.voursa.com{link}" if link != "N/A" else "N/A"
+
+        houses.append({
+            'Title': title,
+            'Price': price,
+            'Image URL': image_url,
+            'Link': link
+        })
+
+    sorted_houses = sorted(houses, key=lambda x: x['Price'])
+
+    cheapest_houses = sorted_houses[:10]
+
+    json_response = json.dumps(cheapest_houses, ensure_ascii=False, indent=4)
+
+    print(json_response)
+
+else:
+    print(f"Failed to retrieve the website. Status code: {response.status_code}")

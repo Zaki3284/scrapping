@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Search</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-lg mx-auto bg-white rounded-2xl shadow-xl p-6">
+        <h1 class="text-2xl font-bold mb-4 text-center">Find the Cheapest Cars</h1>
+        <form id="search-form" class="space-y-4">
+            <div>
+                <label for="brand" class="block text-lg font-medium">Brand:</label>
+                <select id="brand" name="brand" class="w-full p-2 border rounded">
+                    <option value="">Select Brand</option>
+                    {% for brand in brands %}
+                        <option value="{{ brand }}">{{ brand }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="model" class="block text-lg font-medium">Model:</label>
+                <select id="model" name="model" class="w-full p-2 border rounded">
+                    <option value="">Select Model</option>
+                </select>
+            </div>
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded">Search</button>
+        </form>
+
+        <div id="results" class="mt-6"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $('#brand').change(function() {
+            let brand = $(this).val();
+            $('#model').html('<option value="">Loading...</option>');
+            $.get('/get_models/', { brand }, function(models) {
+                let options = '<option value="">Select Model</option>';
+                $.each(models, (model) => options += `<option value="${model}">${model}</option>`);
+                $('#model').html(options);
+            });
+        });
+
+        $('#search-form').submit(function(e) {
+            e.preventDefault();
+            let brand = $('#brand').val();
+            let model = $('#model').val();
+            $.get('/search_cars/', { brand, model }, function(cars) {
+                let output = cars.length ? cars.map(car => `
+                    <div class="bg-gray-50 p-4 mb-4 rounded shadow">
+                        <img src="${car.Image_URL}" class="w-full h-48 object-cover rounded" alt="Car Image">
+                        <h3 class="text-lg font-semibold mt-2">${car.Title}</h3>
+                        <p class="text-green-600 font-bold">Price: ${car.Price} MRU</p>
+                        <a href="${car.Link}" target="_blank" class="text-blue-500 underline">View Details</a>
+                    </div>`).join('') : '<p>No cars found.</p>';
+                $('#results').html(output);
+            });
+        });
+    </script>
+</body>
+</html>

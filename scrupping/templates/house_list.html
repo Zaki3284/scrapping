@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheapest Houses</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        img {
+            max-width: 100px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cheapest Houses</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Price (MRU)</th>
+                <th>Image</th>
+                <th>Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for house in houses %}
+            <tr>
+                <td>{{ house.Title }}</td>
+                <td>{{ house.Price }}</td>
+                <td>
+                    {% if house.Image_URL != "N/A" %}
+                        <img src="{{ house.Image_URL }}" alt="{{ house.Title }}" onerror="this.src='https://via.placeholder.com/100';">
+                    {% else %}
+                        <img src="https://via.placeholder.com/100" alt="No Image">
+                    {% endif %}
+                </td>
+                <td>
+                    {% if house.Link != "N/A" %}
+                        <a href="{{ house.Link }}" target="_blank">View Details</a>
+                    {% else %}
+                        No Link
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
