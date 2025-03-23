@@ -1,15 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PriceFox 🦊</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Styles -->
+    <!-- Custom Styles -->
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/Signup.css' %}">
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+
     <!-- Floating Robot Assistant -->
     <div id="robotGuide" class="fixed bottom-10 right-10 bg-white dark:bg-gray-800 shadow-lg rounded-xl p-4 flex items-center space-x-3 opacity-0 translate-x-10 transition-all duration-500 max-w-xs">
         <i class="fas fa-robot text-3xl text-amber-500"></i>
@@ -43,7 +48,9 @@
             <h1 class="text-3xl font-bold mb-6 text-gray-800 dark:text-white hidden arabic-font" data-lang="ar">مرحبًا بعودتك!</h1>
             <h1 class="text-3xl font-bold mb-6 text-gray-800 dark:text-white hidden" data-lang="fr">Content de te revoir!</h1>
 
-            <form class="space-y-6">
+            <form method="POST" action="{% url 'login' %}" class="space-y-6">
+                {% csrf_token %}
+                
                 <!-- Honeypot Field -->
                 <div class="hidden">
                     <input type="text" name="website" id="website" tabindex="-1" autocomplete="off">
@@ -57,7 +64,7 @@
                     </label>
                     <div class="flex items-center border dark:border-gray-600 rounded-lg px-3 py-2">
                         <i class="fas fa-envelope text-gray-400 me-2"></i>
-                        <input type="email" required class="w-full bg-transparent focus:outline-none" placeholder="john@example.com">
+                        <input type="email" name="username" required class="w-full bg-transparent focus:outline-none" placeholder="john@example.com" value="{{ form.username.value }}">
                     </div>
                 </div>
 
@@ -69,7 +76,7 @@
                     </label>
                     <div class="flex items-center border dark:border-gray-600 rounded-lg px-3 py-2">
                         <i class="fas fa-lock text-gray-400 me-2"></i>
-                        <input type="password" required class="w-full bg-transparent focus:outline-none" placeholder="••••••••">
+                        <input type="password" name="password" required class="w-full bg-transparent focus:outline-none" placeholder="••••••••">
                     </div>
                 </div>
 
@@ -112,7 +119,6 @@
         </div>
     </footer>
 
-    <script src="{% static 'js/scripts.js' %}"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const robotGuide = document.getElementById("robotGuide");
@@ -128,6 +134,31 @@
 
             // Copyright year
             document.getElementById('copyrightYear').textContent = new Date().getFullYear();
+
+            // Language selector
+            const languageSelect = document.getElementById('languageSelect');
+            languageSelect.addEventListener('change', function() {
+                const lang = languageSelect.value;
+                document.documentElement.lang = lang;
+                const elements = document.querySelectorAll('[data-lang]');
+                elements.forEach((el) => {
+                    const langText = el.getAttribute('data-lang');
+                    if (langText === lang) {
+                        el.classList.remove('hidden');
+                    } else {
+                        el.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Theme toggle button
+            const themeToggle = document.getElementById('themeToggle');
+            themeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('dark');
+            });
         });
     </script>
+
+
 </body>
+</html>

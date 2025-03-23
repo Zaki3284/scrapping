@@ -14,6 +14,7 @@ djangorestframework==3.15.2
 djangorestframework_simplejwt==5.4.0
 fpdf==1.7.2
 frozenlist==1.5.0
+greenlet==3.1.1
 h11==0.14.0
 idna==3.10
 isort==6.0.0
@@ -25,9 +26,17 @@ packaging==24.2
 pandas==2.2.3
 pillow==11.1.0
 platformdirs==4.3.6
+playwright==1.51.0
 propcache==0.3.0
+pyee==12.1.1
 PyJWT==2.10.1
 pylint==3.3.4
+pynput==1.8.1
+pyobjc-core==11.0
+pyobjc-framework-ApplicationServices==11.0
+pyobjc-framework-Cocoa==11.0
+pyobjc-framework-CoreText==11.0
+pyobjc-framework-Quartz==11.0
 PySocks==1.7.1
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1

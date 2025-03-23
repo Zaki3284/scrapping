@@ -53,3 +53,30 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def has_module_perms(self, app_label):
         return self.is_superuser or self.user_permissions.filter(content_type__app_label=app_label).exists()
+
+class FormL(models.Model):
+    timestamp = models.DateTimeField(auto_now_add=True)
+    form_type = models.CharField(max_length=50,default=True)
+    data = models.JSONField()
+
+    def __str__(self):
+        return f"{self.form_type} log at {self.timestamp}"
+    
+
+class RegistrationLog(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=15)
+    password = models.CharField(max_length=128)  
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Registration: {self.email}"
+    
+class LoginLog(models.Model):
+    email = models.EmailField()
+    password = models.CharField(max_length=128)  
+    login_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Login Attempt: {self.email}"

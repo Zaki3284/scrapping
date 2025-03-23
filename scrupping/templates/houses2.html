@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheapest Properties</title>
+</head>
+<body>
+    <h1>Top 15 Cheapest Properties</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Item URL</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td><img src="{{ product.image_url }}" alt="Property Image" width="100"></td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.description }}</td>
+                <td><a href="{{ product.item_url }}" target="_blank">View Property</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

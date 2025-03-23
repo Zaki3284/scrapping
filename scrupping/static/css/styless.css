@@ -1,0 +1,53 @@
+/* Apple-inspired styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #000;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Animation classes */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Button styles */
+  button {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    border: none;
+  }
+  
+  /* Custom apple brand colors */
+  .bg-apple-blue {
+    background-color: #0070e3;
+  }
+  
+  .text-apple-blue {
+    color: #0070e3;
+  }
+  
+  /* Adjust the Tailwind inputs */
+  input[type="radio"] {
+    accent-color: #0070e3;
+  }
+  
+  /* Link styles */
+  a {
+    color: #0070e3;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  

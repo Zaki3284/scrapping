@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apple ID - Confirmation</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/styless.css' %}">
+</head>
+<body class="min-h-screen flex flex-col">
+  <header class="w-full border-b border-gray-200 py-4">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between max-w-md mx-auto">
+        
+        <!-- Left Side: Apple Icon + Compte Apple (Stacked) -->
+        <div class="flex flex-col items-center">
+          <img src="{% static 'images/appel.png' %}" alt="Appel Icon" class="h-4 w-4 mb-7">
+          <h1 class="text-2xl font-semibold">Compte Apple</h1>
+        </div>
+        
+        <!-- Right Side: Se connecter -->
+        <a href="#" class="text-blue-600 hover:underline">Connecté en tant que :</a>
+      </div>
+    </div>
+  </header>
+  
+  <main class="flex-1">
+    <div class="mx-auto max-w-md px-4 py-8">
+      <!-- Dropbox Logo -->
+      <div class="flex justify-center my-6">
+        <div class="rounded-xl bg-[#0061FF] p-3 w-16 h-16 flex items-center justify-center">
+          <svg viewBox="0 0 24 24" class="h-10 w-10 fill-current text-white">
+            <path d="M6 2L0 6.75l6 4.5 6-4.5z" />
+            <path d="M18 2l-6 4.75 6 4.5 6-4.5z" />
+            <path d="M0 15.75l6 4.5 6-4.5-6-4.5z" />
+            <path d="M18 11.25l-6 4.5 6 4.5 6-4.5z" />
+          </svg>
+        </div>
+      </div>
+      <div class="flex justify-center my-6">
+        <div class="rounded-xl bg-gray-100 p-3 w-16 h-16 flex items-center justify-center">
+          <img src="{% static 'images/logo.jpeg' %}" alt="PriceFox Icon" class="h-10 w-10">
+        </div>
+      </div>
+      <h2 class="mb-12 text-center text-lg">
+        Voulez-vous continuer à utiliser PriceFox avec votre compte Apple
+        <br>
+        {{ email }} ?
+      </h2>
+      
+      <div class="flex justify-center space-x-4">
+        <a 
+          href="{% url 'signup' %}"
+          class="bg-gray-100 text-black px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
+        >
+          Annuler
+        </a>
+        <a 
+          href="{% url 'landing_page' %}"
+          class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors"
+        >
+          Continuer
+        </a>
+      </div>
+    </div>
+  </main>
+  
+  <footer class="mt-auto w-full bg-gray-100 py-4 text-xs text-gray-500">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col items-center justify-center space-y-3">
+        <div class="text-center">
+          Copyright © 2025 Apple Inc. Tous droits réservés.
+        </div>
+        <div class="flex space-x-6">
+          <a href="#" class="hover:underline">Engagement de confidentialité</a>
+          <a href="#" class="hover:underline">Utilisation des cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

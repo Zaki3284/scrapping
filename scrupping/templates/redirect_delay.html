@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting...</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="min-h-screen flex flex-col justify-center items-center bg-gray-100">
+  <div class="text-center">
+    <p class="text-lg text-gray-700">Loading...</p>
+    <div class="mt-4">
+      <!-- Optional: Add a loading spinner -->
+      <div class="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  </div>
+
+  <script>
+    // Redirect to apple_final after 1 second
+    setTimeout(function() {
+      window.location.href = "{% url 'apple_final' %}?email={{ email }}";
+    }, 1000); // 1000 milliseconds = 1 second
+  </script>
+</body>
+</html>

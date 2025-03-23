@@ -65,5 +65,5 @@ else:
     print(f"Failed to retrieve the website. Status code: {response.status_code}")
     
     
-"https://www.voursa.com/Index.cfm?gct=1&sct=11&gv=1&av=1&bv=27&cv=2012&dv=1&ev=2&fv=7&genre=0&pp=0&localisation=1&pmin=800000&pmax=100000"
-"https://www.voursa.com/index.cfm?gct=1&sct=11&gv=1&av=3&bv=114&cv=2020&dv=3&ev=1&fv=3&genre=0&pp=0&localisation=3&pmin=8000&pmax=0"
+# "https://www.voursa.com/Index.cfm?gct=1&sct=11&gv=1&av=1&bv=27&cv=2012&dv=1&ev=2&fv=7&genre=0&pp=0&localisation=1&pmin=800000&pmax=100000"
+# "https://www.voursa.com/index.cfm?gct=1&sct=11&gv=1&av=3&bv=114&cv=2020&dv=3&ev=1&fv=3&genre=0&pp=0&localisation=3&pmin=8000&pmax=0"

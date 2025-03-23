@@ -55,7 +55,7 @@ updateThemeIcon();
 updateLanguage();
 
 // Form submission handling
-document.getElementById('signupForm').addEventListener('submit', function(event) {
+document.getElementById('loginForm').addEventListener('submit', function(event) {
     event.preventDefault();
     
     const formData = new FormData(this);
@@ -67,7 +67,7 @@ document.getElementById('signupForm').addEventListener('submit', function(event)
         formDataObj[key] = value;
     });
     
-    fetch('/register/', {
+    fetch('/login/', {
         method: 'POST',
         headers: {
             'X-CSRFToken': csrfToken,
@@ -78,21 +78,25 @@ document.getElementById('signupForm').addEventListener('submit', function(event)
     })
     .then(response => response.json())
     .then(data => {
-        if (data.id) {
-            // Registration successful
-            window.location.href = '/login/';
+        if (data.success) {
+            // Login successful
+            
+            // Store tokens in localStorage
+            localStorage.setItem('access_token', data.access);
+            localStorage.setItem('refresh_token', data.refresh);
+            
+            // Redirect to landing page
+            window.location.href = data.redirect_url;
         } else {
-            // Show error messages
+            // Show error message
             const errorDiv = document.getElementById('errorMessage');
-            errorDiv.textContent = Object.entries(data)
-                .map(([key, errors]) => `${key}: ${errors.join(', ')}`)
-                .join('; ');
+            errorDiv.textContent = data.error || "Login failed";
             errorDiv.classList.remove('hidden');
         }
     })
     .catch(error => {
         console.error('Error:', error);
-        document.getElementById('errorMessage').textContent = "An error occurred during registration";
+        document.getElementById('errorMessage').textContent = "An error occurred during login";
         document.getElementById('errorMessage').classList.remove('hidden');
     });
 });

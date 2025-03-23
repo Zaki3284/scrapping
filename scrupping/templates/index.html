@@ -1,4 +1,4 @@
-{% load static %}  
+{% load static %}  <!-- Add this line at the top of your template -->
 <!DOCTYPE html>
 <html lang="en" dir="ltr" class="light">
 <head>
@@ -8,55 +8,55 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
     <!-- Navigation -->
-    <nav class="bg-gray-800 dark:bg-gray-700 shadow-lg w-full p-4 flex justify-between items-center text-white">
-        <div class="flex space-x-6 ms-10">
-            <a href="#" class="flex items-center font-bold text-lg hover:text-amber-400">
-                <i class="fas fa-car-side me-2"></i>PriceFox 🦊
-            </a>
-            <a href="#cars" class="hover:text-amber-400">
-                <i class="fas fa-car me-1"></i>
-                <span data-lang="en">Cars</span>
-                <span data-lang="ar" class="hidden">سيارات</span>
-                <span data-lang="fr" class="hidden">Voitures</span>
-            </a>
-            <a href="#clothing" class="hover:text-amber-400">
-                <i class="fas fa-tshirt me-1"></i>
-                <span data-lang="en">Clothing</span>
-                <span data-lang="ar" class="hidden">ملابس</span>
-                <span data-lang="fr" class="hidden">Vêtements</span>
-            </a>
-            <a href="#shoes" class="hover:text-amber-400">
-                <i class="fas fa-shoe-prints me-1"></i>
-                <span data-lang="en">Shoes</span>
-                <span data-lang="ar" class="hidden">أحذية</span>
-                <span data-lang="fr" class="hidden">Chaussures</span>
-            </a>
-        </div>
+    <nav class="bg-gray-800 dark:bg-gray-700 shadow-lg w-full p-4 flex flex-col md:flex-row justify-between items-center text-white">
+        <div class="flex flex-wrap space-x-6 ms-10">
+        <a href="#" class="flex items-center font-bold text-lg hover:text-amber-400">
+            <i class="fas fa-car-side me-2"></i>PriceFox 🦊
+        </a>
+        <a href="#cars" class="hover:text-amber-400">
+            <i class="fas fa-car me-1"></i>
+            <span data-lang="en">Cars</span>
+            <span data-lang="ar" class="hidden">سيارات</span>
+            <span data-lang="fr" class="hidden">Voitures</span>
+        </a>
+        <a href="#clothing" class="hover:text-amber-400">
+            <i class="fas fa-house me-1"></i>
+            <span data-lang="en">Clothing</span>
+            <span data-lang="ar" class="hidden">ملابس</span>
+            <span data-lang="fr" class="hidden">Maison</span>
+        </a>
+        <a href="#shoes" class="hover:text-amber-400">
+            <i class="fas fa-briefcase me-1"></i>
+            <span data-lang="en">Shoes</span>
+            <span data-lang="ar" class="hidden">أحذية</span>
+            <span data-lang="fr" class="hidden">Emplois</span>
+        </a>
+    </div>
         <div class="flex items-center space-x-4 me-10">
-            <button class="bg-amber-500 hover:bg-amber-600 px-4 py-2 rounded-full flex items-center">
-                <i class="fas fa-share-alt me-2"></i>
-                <span data-lang="en">Share Our App</span>
-                <span data-lang="ar" class="hidden">شارك تطبيقنا</span>
-                <span data-lang="fr" class="hidden">Partager notre application</span>
-            </button>            
+            <form id="logoutForm" method="POST" action="{% url 'loginn' %}">
+                {% csrf_token %}
+                <button type="submit" class="bg-amber-500 hover:bg-amber-600 px-4 py-2 rounded-full flex items-center">
+                    <i class="fas fa-sign-out-alt me-2"></i> 
+                    <span data-lang="en">Logout</span>
+                    <span data-lang="ar" class="hidden">تسجيل الخروج</span>
+                    <span data-lang="fr" class="hidden">Se connecter</span>
+                </button>
+            </form>       
+            <form id="logoutForm" method="POST" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="block w-full text-left text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 p-2">
+                    <i class="fas fa-sign-out-alt me-2"></i> 
+                    <span data-lang="en">Logout</span>
+                    <span data-lang="ar" class="hidden">تسجيل الخروج</span>
+                    <span data-lang="fr" class="hidden">Se déconnecter</span>
+                </button>
+            </form>           
             <div class="relative group">
-                <img src="/static/images/logo.jpeg" class="rounded-full cursor-pointer" alt="profile" style="height: 50px; width: 50px; object-fit: cover;">
-                <div class="absolute hidden group-hover:block end-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl p-4">
-                    <a href="#" class="block text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 p-2">
-                        <span data-lang="en">Profile</span>
-                        <span data-lang="ar" class="hidden">الملف الشخصي</span>
-                        <span data-lang="fr" class="hidden">Profil</span>
-                    </a>
-                    <a href="#" class="block text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 p-2">
-                        <span data-lang="en">Settings</span>
-                        <span data-lang="ar" class="hidden">الإعدادات</span>
-                        <span data-lang="fr" class="hidden">Paramètres</span>
-                    </a>
-                </div>
+                <img src="{% static 'images/logo.jpeg' %}" class="rounded-full cursor-pointer" alt="profile" style="height: 50px; width: 50px; object-fit: cover;">
+                <!-- Other dropdown content -->
             </div>
         </div>
     </nav>
@@ -71,54 +71,122 @@
             <p class="text-xl mb-6" data-lang="en">Find the lowest prices for all your needs</p>
             <p class="text-xl mb-6 hidden arabic-font" data-lang="ar">اكتشف أقل الأسعار لجميع احتياجاتك</p>
             <p class="text-xl mb-6 hidden" data-lang="fr">Trouvez les prix les plus bas pour tous vos besoins</p>
-            
-            <button class="bg-amber-500 hover:bg-amber-600 px-8 py-3 rounded-full text-lg font-semibold" >
-                <i class="fas fa-arrow-right me-2"><a href="{% url 'login' %}" >.</a></i>
-                <span data-lang="en">Register Now</span>
-                <span data-lang="ar" class="hidden">سجل الآن</span>
-                <span data-lang="fr" class="hidden">Inscrire Maintenant</span>
-            </button>
+    
+            <form id="logoutForm" method="POST" action="{% url 'loginn' %}">
+                {% csrf_token %}
+                <a href="{% url 'login' %}">
+                    <button type="submit" class="bg-amber-500 hover:bg-amber-600 px-8 py-3 rounded-full text-lg font-semibold">
+                        <i class="fas fa-arrow-right me-2"></i>
+                        <span data-lang="en">Register Now</span>
+                        <span data-lang="ar" class="hidden">سجل الآن</span>
+                        <span data-lang="fr" class="hidden">Inscrire Maintenant</span>
+                    </button>
+                </a>
+            </form>
         </div>
     </div>
 
-    <!-- Featured Products -->
+    <!-- Featured Categories -->
     <div class="container mx-auto mt-16 px-4">
         <div class="flex flex-col md:flex-row justify-between items-start mb-8 gap-4">
             <div>
-                <h2 class="text-3xl font-bold text-gray-800 dark:text-white" data-lang="en">Featured Products</h2>
-                <h2 class="text-3xl font-bold text-gray-800 dark:text-white hidden arabic-font" data-lang="ar">المنتجات المميزة</h2>
-                <h2 class="text-3xl font-bold text-gray-800 dark:text-white hidden" data-lang="fr">Produits en Vedette</h2>
-            </div>
-            
-            <div class="flex flex-wrap gap-2" id="filterButtons">
-                <button class="filter-btn bg-Goldenrod-600 text-white px-4 py-2 rounded-full" data-filter="all">
-                    <span data-lang="en">All</span>
-                    <span data-lang="ar" class="hidden">الكل</span>
-                    <span data-lang="fr" class="hidden">Tous</span>
-                </button>
-                <button class="filter-btn bg-Goldenrod-200 dark:bg-gray-700 px-4 py-2 rounded-full" data-filter="cars">
-                    <i class="fas fa-car me-2"></i>
-                    <span data-lang="en">Cars</span>
-                    <span data-lang="ar" class="hidden">سيارات</span>
-                    <span data-lang="fr" class="hidden">Voitures</span>
-                </button>
-                <button class="filter-btn bg-Goldenrod-200 dark:bg-gray-700 px-4 py-2 rounded-full" data-filter="clothing">
-                    <i class="fas fa-tshirt me-2"></i>
-                    <span data-lang="en">Clothing</span>
-                    <span data-lang="ar" class="hidden">ملابس</span>
-                    <span data-lang="fr" class="hidden">Vêtements</span>
-                </button>
-                <button class="filter-btn bg-gray-200 dark:bg-gray-700 px-4 py-2 rounded-full" data-filter="shoes">
-                    <i class="fas fa-shoe-prints me-2"></i>
-                    <span data-lang="en">Shoes</span>
-                    <span data-lang="ar" class="hidden">أحذية</span>
-                    <span data-lang="fr" class="hidden">Chaussures</span>
-                </button>
+                <h2 class="text-3xl font-bold text-gray-800 dark:text-white" data-lang="en">Explore Categories</h2>
+                <h2 class="text-3xl font-bold text-gray-800 dark:text-white hidden arabic-font" data-lang="ar">تصفح الفئات</h2>
+                <h2 class="text-3xl font-bold text-gray-800 dark:text-white hidden" data-lang="fr">Explorer les Catégories</h2>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="productsContainer">
-            <!-- Products loaded dynamically -->
+        <!-- Category Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="categoriesContainer">
+            <!-- Cars -->
+            <a href="{% url 'cars_list' %}" class="category-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-transform transform hover:scale-105">
+                <img src="{% static 'images/car.jpg' %}" class="w-full h-56 object-cover" alt="Cars">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white" data-lang="en">Cars</h3>
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white hidden arabic-font" data-lang="ar">سيارات</h3>
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white hidden" data-lang="fr">Voitures</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2" data-lang="en">Find the best deals on cars</p>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2 hidden arabic-font" data-lang="ar">اكتشف أفضل العروض على السيارات</p>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2 hidden" data-lang="fr">Trouvez les meilleures offres de voitures</p>
+                </div>
+            </a>
+
+            <!-- Houses -->
+            <a href="{% url 'houses_list' %}" class="category-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-transform transform hover:scale-105">
+                <img src="{% static 'images/maison.jpg' %}" class="w-full h-56 object-cover" alt="Houses">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white" data-lang="en">Houses</h3>
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white hidden arabic-font" data-lang="ar">منازل</h3>
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white hidden" data-lang="fr">Maisons</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2" data-lang="en">Explore houses for sale or rent</p>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2 hidden arabic-font" data-lang="ar">اكتشف المنازل المعروضة للبيع أو الإيجار</p>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2 hidden" data-lang="fr">Explorez les maisons à vendre ou à louer</p>
+                </div>
+            </a>
+
+            <!-- Accessories -->
+            <a href="{% url 'accessoire_list' %}" class="category-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-transform transform hover:scale-105">
+                <img src="{% static 'images/acc.jpg' %}" class="w-full h-56 object-cover" alt="Accessories">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white" data-lang="en">Accessories</h3>
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white hidden arabic-font" data-lang="ar">إكسسوارات</h3>
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white hidden" data-lang="fr">Accessoires</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2" data-lang="en">Shop for the latest accessories</p>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2 hidden arabic-font" data-lang="ar">تسوق أحدث الإكسسوارات</p>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2 hidden" data-lang="fr">Achetez les derniers accessoires</p>
+                </div>
+            </a>
+
+            <!-- Appel d'Offres -->
+            <a href="{% url 'appel_offre_list' %}" class="category-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-transform transform hover:scale-105">
+                <img src="{% static 'images/oofer.png' %}" class="w-full h-56 object-cover" alt="Appel d'Offres">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white" data-lang="en">Appel d'Offres</h3>
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white hidden arabic-font" data-lang="ar">عروض المناقصات</h3>
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white hidden" data-lang="fr">Appels d'Offres</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2" data-lang="en">Explore public tenders and offers</p>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2 hidden arabic-font" data-lang="ar">اكتشف عروض المناقصات العامة</p>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2 hidden" data-lang="fr">Explorez les appels d'offres publics</p>
+                </div>
+            </a>
+
+            <!-- Emplois -->
+            <a href="{% url 'job_offers_list' %}" class="category-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-transform transform hover:scale-105">
+                <img src="{% static 'images/emplois.jpg' %}" class="w-full h-56 object-cover" alt="Emplois">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white" data-lang="en">Emplois</h3>
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white hidden arabic-font" data-lang="ar">وظائف</h3>
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white hidden" data-lang="fr">Emplois</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2" data-lang="en">Find job opportunities</p>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2 hidden arabic-font" data-lang="ar">اكتشف فرص العمل</p>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2 hidden" data-lang="fr">Trouvez des opportunités d'emploi</p>
+                </div>
+            </a>
+
+            <!-- Makeup -->
+            <a href="{% url 'product_list' %}" class="category-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-transform transform hover:scale-105">
+                <img src="{% static 'images/maquillage.jpeg' %}" class="w-full h-56 object-cover" alt="Makeup">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white" data-lang="en">Makeup</h3>
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white hidden arabic-font" data-lang="ar">مكياج</h3>
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white hidden" data-lang="fr">Cosemetic</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2" data-lang="en">Discover the best makeup products</p>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2 hidden arabic-font" data-lang="ar">اكتشف أفضل منتجات المكياج</p>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2 hidden" data-lang="fr">Découvrez les meilleurs produits de maquillage</p>
+                </div>
+            </a>
+
+            <a href="{% url 'phone_list' %}" class="category-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-transform transform hover:scale-105">
+                <img src="{% static 'images/elec.jpg' %}" class="w-full h-56 object-cover" alt="Makeup">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white" data-lang="en">Makeup</h3>
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white hidden arabic-font" data-lang="ar">مكياج</h3>
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-white hidden" data-lang="fr">Electronics</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2" data-lang="en">Discover the best makeup products</p>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2 hidden arabic-font" data-lang="ar">اكتشف أفضل منتجات المكياج</p>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2 hidden" data-lang="fr">Découvrez les meilleurs produits de maquillage</p>
+                </div>
+            </a>
         </div>
     </div>
 

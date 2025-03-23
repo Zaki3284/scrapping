@@ -30,7 +30,7 @@ const products = [
         ar: { name: 'سيارة رياضية', desc: 'مركبة رياضية عالية الأداء' },
         fr: { name: 'Voiture de Sport', desc: 'Véhicule sportif haute performance' },
         price: 12000,
-        image: '/static/images/car2.jpeg'
+        image: '/static/images/car.jpeg'
     }
 ];
 

