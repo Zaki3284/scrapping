@@ -69,6 +69,7 @@ if response.status_code == 200:
     sorted_cars = sorted(cars, key=lambda x: x['Price'])
 
     cheapest_cars = sorted_cars[:10]
+    cheapest_cars = sorted_cars[:10]
 
     desktop_path = "/Users/javaarhmeimed/desktop/cheapest_cars.pdf"
     c = canvas.Canvas(desktop_path, pagesize=letter)
